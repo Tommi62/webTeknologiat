@@ -103,6 +103,10 @@
 
 }
 
+#res1{
+  list-style-type: none;
+}
+
 .button3 {
   margin-top: 1rem;
 }

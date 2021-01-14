@@ -12,7 +12,6 @@ const coursesFi = ["Jauhelihapihvi, ruskeaa kermakastiketta ja keitettyä peruna
                 "Juusto / Kana / Kasvis / Halloumi burgeri ja ranskalaiset"];
 
 const box = document.querySelector('#res1');
-const box2 = document.querySelector('#res2');
 const button = document.querySelector('.button');
 const button2 = document.querySelector('.button2');
 const button3 = document.querySelector('.button3');
@@ -25,7 +24,7 @@ let selectedLanguage;
 const changeLanguage = (languages) => {
   box.innerHTML = '';
   for(const language of languages){
-    box.innerHTML += language + '<br><br>';
+    box.innerHTML +='<li>' + language + '</li><br>';
   }
 };
 
@@ -41,6 +40,17 @@ button.addEventListener('click', () => {
     console.log('False');
   }
 });
+
+const sortArray = (menu, order) =>{
+  if(order){
+    menu.sort();
+  }
+  else{
+    menu.sort();
+    menu.reverse();
+  }
+  return menu;
+};
 
 button2.addEventListener('click', () => {
   if(!language){
@@ -69,17 +79,6 @@ button2.addEventListener('click', () => {
 }
 });
 
-const sortArray = (menu, order) =>{
-  if(order){
-    menu.sort();
-  }
-  else{
-    menu.sort();
-    menu.reverse();
-  }
-  return menu;
-};
-
 const randomDish = () => {
   if(!language){
     selectedLanguage = coursesFi;
@@ -89,7 +88,8 @@ const randomDish = () => {
   }
 
   let random = Math.floor(Math.random() * selectedLanguage.length);
-  box2.innerHTML = selectedLanguage[random];
+  box.innerHTML = '';
+  box.innerHTML = selectedLanguage[random];
 };
 
 button3.addEventListener('click', () => {
