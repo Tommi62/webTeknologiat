@@ -1,7 +1,23 @@
+:root {
+  --green: #43e04f;
+  --red: #940e3f;
+  --dark: #343A40;
+  --grey: #9badbf;
+  --black: #000000;
+  --darkGreen: #1D9426;
+  --altGreen: #65FF71;
+  --altRed: #E0437C;
+}
+
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .navbar{
@@ -27,14 +43,17 @@
 
 .navLink{
   text-decoration: none;
-  font-size: 1.2rem;
-  color: #910404;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 1.5em;
+  color: var(--red);
   padding: 0.7rem;
   border-radius: 0.3rem;
+  line-height: 3.1rem;
 }
 
 .navLink:hover{
-  background-color: #910404;
+  background-color: var(--altRed);
   color: #ffffff;
 }
 
@@ -44,8 +63,9 @@
 }
 
 #search{
-  padding: 0.4rem;
-  border-color: #910404;
+  padding: 0.47rem;
+  padding-left: 2.1rem;
+  border-color: var(--red);
   border-radius: 0.3rem;
 }
 
@@ -60,16 +80,28 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: lightgreen;
+  background-color: var(--green);
 }
 
 #sloganText h2{
   text-align: center;
+  color: white;
+}
+
+.header{
+  font-family: 'Roboto Slab', serif;
+  font-weight: 800;
+  font-size: 4em;
+}
+
+.underHeader{
+  font-family: 'Roboto Slab', serif;
+  font-size: 1.45em;
 }
 
 #image{
   flex: 6;
-  background-image: url("/images/banner.jpg");
+  background-image: url("images/banner.jpg");
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: center;
@@ -78,6 +110,9 @@
 #info{
   text-align: center;
   padding: 2% 15%;
+  color: var(--dark);
+  font-family: 'Lato', sans-serif;
+  font-size: 1.5em;
 }
 
 .resContainer{
@@ -87,26 +122,93 @@
 }
 
 .restaurants{
-  background-color: #ccccca;
   width: 20rem;
   margin: 2rem;
   padding: 0.5rem;
   border-radius: 0.5rem;
-  border: 2px dotted #910404;
+  border: 2px solid var(--grey);
+}
+
+.restaurants svg{
+  margin-top: 1.2rem;
+  margin-left: 1.2rem;
+  width: 1.2rem;
+  text-align: center;
+}
+
+.location:hover{
+  stroke: var(--green);
+  fill: var(--green);
+}
+
+.restaurants h4{
+  margin-top: 1rem;
+  float: left;
+  color: var(--black);
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 1.3em;
 }
 
 #triangle{
   width: 0;
   height: 0;
-  border-bottom: 30vh solid lightgreen;
+  border-bottom: 30vh solid var(--green);
   border-right: 10vw solid transparent;
 
 }
 
 #res1{
   list-style-type: none;
+  color: var(--dark);
+  font-family: 'Lato', sans-serif;
+  font-size: 0.7em;
 }
 
 .button3 {
   margin-top: 1rem;
+}
+
+.inputIcon svg{
+  position: absolute;
+  fill: var(--red);
+  stroke: var(--red);
+  width: 1.4rem;
+  text-align: center;
+  margin-left: 0.4rem;
+  margin-top: 0.45rem;
+}
+
+.addButton{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  max-width: 100%;
+  overflow-x: hidden;
+  margin-right: 35rem;
+}
+
+.addButton svg{
+  width: 1.5rem;
+  margin-bottom: 2rem;
+  margin-right: 0.5rem;
+  stroke: var(--grey);
+  fill: var(--grey);
+}
+
+.addButton svg:hover{
+  stroke: var(--black);
+  fill: var(--black);
+}
+
+.addButton svg:active{
+  stroke: var(--green);
+  fill: var(--green);
+}
+
+.addRes{
+  list-style-type: none;
+  text-decoration: none;
+  margin-top: 0.2rem;
+  color: var(--grey);
 }
