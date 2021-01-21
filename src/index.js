@@ -2,8 +2,8 @@ import Lunchmenu from './assets/sodexo-menu.json';
 import Lunchmenu2 from './assets/fazer-week-example.json';
 import LunchMenuFazerFi from './assets/fazer-week-fi.json';
 import LunchMenuFazerEn from './assets/fazer-week-en.json';
-import {changeLanguage, parseSodexoMenu} from './modules/SodexoData';
-import {createList, parseFazerMenu} from './modules/FazerData';
+import {changeLanguage, parseSodexoMenu} from './modules/sodexo-data';
+import {createList, parseFazerMenu} from './modules/fazer-data';
 
 
 
