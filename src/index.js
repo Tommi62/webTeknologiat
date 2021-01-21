@@ -110,19 +110,23 @@ const meals = [
 ];
 
 //1.
-const name = 'Ifa,l(fs af)a/f-s9';
+const name = 'If1e ,/(asfs-fs af)1';
 
 const validateName = (name) => {
-  const regEx = /^[A-ZÖÄÅ]{1}[a-zöäå0-9\s,\/\(\)._-]{4,64}$/;
+  const regEx = /^[A-ZÖÄÅ]{1}[a-zöäå0-9\s,\/\(\)\-]{3,63}$/;
   return regEx.test(name);
 };
 
 const result = validateName(name);
 console.log('Tulos: ' + result);
 
+for(const item of Object.values(meals)){
+  console.log('Meal ' + item.name + ' is valid: ' + validateName(item.name));
+};
+
 //2.
   let sortPrice = meals.sort((a, b) => {
-  return b.price - a.price;
+  return a.price - b.price;
   });
 
 console.log(sortPrice);
