@@ -1,20 +1,13 @@
-import Lunchmenu from './assets/sodexo-menu.json';
 import Lunchmenu2 from './assets/fazer-week-example.json';
-import LunchMenuFazerFi from './assets/fazer-week-fi.json';
-import LunchMenuFazerEn from './assets/fazer-week-en.json';
 import {changeLanguage, parseSodexoMenu} from './modules/sodexo-data';
-import {createList, parseFazerMenu} from './modules/fazer-data';
+import {runParseFazerMenu} from './modules/fazer-data';
 
 
 
-const coursesFi = parseSodexoMenu(Lunchmenu.courses);
+const coursesFi = parseSodexoMenu();
 changeLanguage(coursesFi);
 
-let lang = true;
-const menuFi = parseFazerMenu(LunchMenuFazerFi.LunchMenus[0].SetMenus, lang);
-lang = false;
-parseFazerMenu(LunchMenuFazerEn.LunchMenus[0].SetMenus, lang);
-createList(menuFi);
+runParseFazerMenu();
 
 /*
 //Week2-Task2

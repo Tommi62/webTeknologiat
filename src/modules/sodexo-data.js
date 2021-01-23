@@ -1,3 +1,4 @@
+import Lunchmenu from '../assets/sodexo-menu.json';
 let coursesEn = [];
 let coursesFi = [];
 const box = document.querySelector('#res1');
@@ -85,8 +86,8 @@ button3.addEventListener('click', () => {
   randomDish();
 });
 
-const parseSodexoMenu = (sodexoDailyMenu) => {
-  const courses = Object.values(sodexoDailyMenu);
+const parseSodexoMenu = () => {
+  const courses = Object.values(Lunchmenu.courses);
   for(const course of courses) {
     coursesEn.push(course.title_en);
     coursesFi.push(course.title_fi);

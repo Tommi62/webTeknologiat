@@ -1,3 +1,6 @@
+import LunchMenuFazerFi from '../assets/fazer-week-fi.json';
+import LunchMenuFazerEn from '../assets/fazer-week-en.json';
+import { changeLanguage } from './sodexo-data';
 let menuEn = [];
 let menuFi = [];
 const box = document.querySelector('#res2');
@@ -95,9 +98,15 @@ const parseFazerMenu = (setMenus, lang) => {
         }
       }
     }
-    if(lang){
-      return menuFi;
-    }
 };
 
-export {createList, parseFazerMenu};
+let lang = true;
+
+const runParseFazerMenu = () =>{
+  parseFazerMenu(LunchMenuFazerFi.LunchMenus[0].SetMenus, lang);
+  lang = false;
+  parseFazerMenu(LunchMenuFazerEn.LunchMenus[0].SetMenus, lang);
+  createList(menuFi);
+};
+
+export {runParseFazerMenu};
