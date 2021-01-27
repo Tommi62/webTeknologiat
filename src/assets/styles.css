@@ -24,7 +24,7 @@ html, body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100vw;
+  width: 100%;
 }
 
 .container{
@@ -219,5 +219,26 @@ html, body {
   text-decoration: none;
   margin-top: 0.2rem;
   color: var(--grey);
+}
+
+.element{
+  display: flex;
+  width: 200px;
+  height: 200px;
+  background-color: var(--red);
+  margin: 2rem;
+  color: #ffffff;
+  text-align: center;
+  padding: 1rem;
+  font-size: 2rem;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+.elContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 

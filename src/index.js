@@ -67,7 +67,61 @@ const veganMeals = filterVeganMeals(Lunchmenu2.LunchMenus[0].SetMenus);
 console.log('Vegan meals: ' + veganMeals);
 */
 
+//i.
+let code = ['h','e','l','l','o'];
 
+document.addEventListener('keydown', event => {
+  console.log('keydown:', event.key);
+  if (event.key === code[0]) {
+    console.log('Pass');
+    code.shift();
+    if(code.length === 0){
+      alert('Well done!');
+      code = ['h','e','l','l','o'];
+    }
+  }else{
+    code = ['h','e','l','l','o'];
+  }
+});
 
+//ii.
+document.addEventListener('dblclick', event => {
+  console.log('X: ' + event.clientX + ', Y: ' + event.clientY);
+});
 
+//iii.
+const element = document.querySelector('.element');
 
+element.addEventListener('mouseover', event => {
+  console.log('You touched me!');
+});
+
+//iiii.
+setTimeout(() => element.innerHTML = 'Hurry up!', 15000);
+
+//iiiii.
+const element2 = document.querySelector('#element');
+let timer = setTimeout(() => element2.innerHTML = 'Hurry up!!', 15000);
+
+document.addEventListener('mousemove', event => {
+  resetTimer();
+});
+
+document.addEventListener('keydown', event => {
+  resetTimer();
+});
+
+document.addEventListener('scroll', event => {
+  resetTimer();
+});
+
+document.addEventListener('click', event => {
+  resetTimer();
+});
+
+const resetTimer = () => {
+  console.log('Works');
+  clearTimeout(timer);
+  timer = setTimeout(() => element2.innerHTML = 'Hurry up!!', 15000);
+  element2.innerHTML = '';
+};
