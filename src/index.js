@@ -96,10 +96,10 @@ element.addEventListener('mouseover', event => {
   console.log('You touched me!');
 });
 
-//iiii.
+//iv.
 setTimeout(() => element.innerHTML = 'Hurry up!', 15000);
 
-//iiiii.
+//v.
 const element2 = document.querySelector('#element');
 let timer = setTimeout(() => element2.innerHTML = 'Hurry up!!', 15000);
 
