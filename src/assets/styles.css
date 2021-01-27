@@ -220,6 +220,7 @@ html, body {
   width: 15rem;
   display: flex;
   justify-content: space-between;
+  padding-bottom: 1rem;
 }
 
 button{
