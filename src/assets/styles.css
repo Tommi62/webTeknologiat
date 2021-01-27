@@ -101,7 +101,7 @@ html, body {
 
 #image{
   flex: 6;
-  background-image: url("images/banner.jpg");
+  background-image: url("banner.jpg");
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: center;

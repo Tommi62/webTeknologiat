@@ -12,6 +12,16 @@ let sortEn = true;
 let selectedLanguage;
 let selectedLanguage2;
 
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js').then(registration => {
+      console.log('SW registered: ', registration);
+    }).catch(registrationError => {
+      console.log('SW registration failed: ', registrationError);
+    });
+  });
+};
+
 const changeLanguage = (languages, box) => {
   box.innerHTML = '';
   for(const language of languages){
