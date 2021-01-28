@@ -23,10 +23,8 @@ const sodexoFi = parseSodexoMenu(0);
 const sodexoEn = parseSodexoMenu(1);
 changeLanguage(sodexoFi, box);
 
-const fazerFi = runParseFazerMenu(0);
-const fazerEn = runParseFazerMenu(1);
-console.log('Suomeksi: ' + fazerFi);
-console.log('Englanniksi: ' + fazerEn);
+const fazerFi = runParseFazerMenu(0, 0);
+const fazerEn = runParseFazerMenu(1, 0);
 changeLanguage(fazerFi, box2);
 
 button.addEventListener('click', () => {
@@ -58,36 +56,28 @@ const sortArray = (menu, order) =>{
 button2.addEventListener('click', () => {
   if(!language){
     if(sortFi){
-      sorted = sortArray(sodexoFi, sortFi);
-      changeLanguage(sorted, box);
-      sorted = sortArray(fazerFi, sortFi);
-      changeLanguage(sorted, box2);
       sortFi = false;
     }
     else{
-      sorted = sortArray(sodexoFi, sortFi);
-      changeLanguage(sorted, box);
-      sorted = sortArray(fazerFi, sortFi);
-      changeLanguage(sorted, box2);
       sortFi = true;
     }
+    sorted = sortArray(sodexoFi, sortFi);
+    changeLanguage(sorted, box);
+    sorted = sortArray(fazerFi, sortFi);
+    changeLanguage(sorted, box2);
   }
   else {
       if(sortEn){
-        sorted = sortArray(sodexoEn, sortEn);
-        changeLanguage(sorted, box);
-        sorted = sortArray(fazerEn, sortEn);
-        changeLanguage(sorted, box2);
         sortEn = false;
       }
       else{
-        sorted = sortArray(sodexoEn, sortEn);
-        changeLanguage(sorted, box);
-        sorted = sortArray(fazerEn, sortEn);
-        changeLanguage(sorted, box2);
         sortEn = true;
       }
-}
+      sorted = sortArray(sodexoEn, sortEn);
+      changeLanguage(sorted, box);
+      sorted = sortArray(fazerEn, sortEn);
+      changeLanguage(sorted, box2);
+  }
 });
 
 const randomDish = () => {
