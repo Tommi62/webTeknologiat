@@ -1,31 +1,22 @@
 import LunchMenuFazerFi from '../assets/fazer-week-fi.json';
 import LunchMenuFazerEn from '../assets/fazer-week-en.json';
-let menuEn = [];
-let menuFi = [];
 
-const parseFazerMenu = (setMenus, lang) => {
-    menuEn = [];
-    for(const setMenu of setMenus){
-      for(const meals of setMenu.Meals){
-        if(lang){
-          menuFi.push(meals.Name);
-        }else{
-          menuEn.push(meals.Name);
-        }
-      }
-    }
+const parseFazerMenu = (setMenus) => {
+  let dailyMenu = setMenus.map(setMenu => {
+    let mealName = setMenu.Name;
+    let dishes = setMenu.Meals.map(dish => {
+      return `${dish.Name} (${dish.Diets.join(', ')})`;
+    });
+    return mealName ? `${mealName}: ${dishes.join(', ')}` : dishes.join(', ');
+  });
+  return dailyMenu;
 };
 
-let lang = true;
-
-const runParseFazerMenu = (number) =>{
-  parseFazerMenu(LunchMenuFazerFi.LunchMenus[0].SetMenus, lang);
-  lang = false;
-  parseFazerMenu(LunchMenuFazerEn.LunchMenus[0].SetMenus, lang);
+const runParseFazerMenu = (number, dayOfTheWeek) =>{
   if(number === 0){
-    return menuFi;
+    return parseFazerMenu(LunchMenuFazerFi.LunchMenus[dayOfTheWeek].SetMenus);
   }else{
-    return menuEn;
+    return parseFazerMenu(LunchMenuFazerEn.LunchMenus[dayOfTheWeek].SetMenus);
   }
 };
 
