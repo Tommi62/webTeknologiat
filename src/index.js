@@ -22,6 +22,21 @@ if ('serviceWorker' in navigator) {
   });
 };
 
+const changeNavBar = () => {
+  let x = document.querySelector('.navbar');
+  if (x.className === "navbar") {
+    x.className += " responsive";
+  } else {
+    x.className = "navbar";
+  }
+};
+
+const navIcon = document.querySelector('.icon');
+navIcon.addEventListener('click', () => {
+  console.log('Click');
+  changeNavBar();
+});
+
 const changeLanguage = (languages, box) => {
   box.innerHTML = '';
   for(const language of languages){
