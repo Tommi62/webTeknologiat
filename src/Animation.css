@@ -56,7 +56,10 @@
   background-position: 0 0;
 
   animation: doggowalk 0.5s steps(4) 6,
-  doggosniff 0.5s 3s steps(2) 6;
+  doggosniff 0.5s 3s steps(2) 6,
+  doggoscare 1s 6s steps(1) 1,
+  doggoescape 1s 7s steps(2) 1,
+  doggocamp 0.5s 8s steps(2) infinite;
 
   /*animation-name: doggowalk;
   animation-duration: 0.5s;
@@ -78,3 +81,66 @@
   from{background-position: -360px 0;}
   to{background-position: -600px 0;}
 }
+
+@keyframes doggoscare{
+  from {background-position: 0 -110px;}
+  to {background-position: 0 -110px;}
+}
+
+@keyframes doggoescape{
+  from {background-position: -120px -110px;}
+  to {background-position: -360px -110px;}
+}
+
+@keyframes doggocamp{
+  from{background-position: -360px -110px;}
+  to{background-position: -600px -110px;}
+}
+
+.bird1{
+  position: absolute;
+  top: 50px;
+  left: 10px;
+  width: 80px;
+  height: 70px;
+
+  transition: left 6s linear, top 6s linear;
+
+  background-image: url('sprite.png');
+  background-repeat: no-repeat;
+  background-position: 0 -220px;
+
+  animation: birdfly 0.5s steps(3) 12,
+  birdrise 0.5s 6s steps(3) 6,
+  birdfly 0.5s 9s steps(3) infinite;
+
+}
+
+.birdattack{
+  left: 255px;
+  top: 300px;
+}
+
+.birdescape{
+  left: 500px;
+  top: 50px;
+  transition: left 3s linear, top 3s linear;
+}
+
+.birdbacktonormal{
+  left: 650px;
+  transition: left 2s linear;
+}
+
+@keyframes birdfly{
+  from{background-position: 0 -230px;}
+  to{background-position: -225px -230px;}
+}
+
+@keyframes birdrise{
+  from{background-position: 0 -310px;}
+  to{background-position: -225px -310px;}
+}
+
+
+
