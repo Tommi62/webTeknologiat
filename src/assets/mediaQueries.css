@@ -1,0 +1,125 @@
+@media only screen and (max-width: 950px) {
+  .container{
+    padding: 0;
+  }
+
+  .container li{
+    margin: 0.5rem;
+  }
+
+  .navLink{
+    font-size: 1.5em;
+  }
+
+  .inputContainer{
+    margin-right: 2rem;
+  }
+
+  .navbar{
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .container {
+    display: none;
+  }
+
+  .navbar {
+    justify-content: space-between;
+  }
+
+  .navbar .icon{
+    display: block;
+    margin: 1rem;
+    font-size: 1.7em;
+    margin-top: 1.05rem;
+    color: var(--red);
+  }
+
+  .navbar .icon:hover{
+    color: #000000;
+  }
+
+  .inputContainer{
+    margin-right: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .navbar.responsive {
+    position: relative;
+  }
+  .navbar.responsive .icon {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .navbar.responsive .container {
+    float: none;
+    display: block;
+    text-align: left;
+    margin-top: 3rem;
+  }
+
+  .navbar.responsive .inputContainer {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-top: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  #slogan{
+    display: none;
+  }
+
+  #triangle{
+    display: none;
+  }
+
+  #mobileText{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.445);
+    padding: 0 1rem;
+    border-radius: 0.2rem;
+  }
+
+  #mobileText h2{
+    text-align: center;
+    color: #ffffff;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  #image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
+
+  .underHeader{
+    padding-bottom: 0.7rem;
+  }
+
+  #info{
+    padding: 5% 5%;
+  }
+
+  .resContainer{
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .restaurants{
+    margin: 1rem;
+  }
+
+  .addButton{
+    margin: 1rem 0;
+  }
+}
