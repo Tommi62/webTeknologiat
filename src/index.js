@@ -1,5 +1,6 @@
 import {parseSodexoMenu} from './modules/sodexo-data';
 import {runParseFazerMenu} from './modules/fazer-data';
+import {getMenus} from './modules/network-features';
 const box = document.querySelector('#res1');
 const box2 = document.querySelector('#res2');
 const button = document.querySelector('.button');
@@ -7,10 +8,14 @@ const button2 = document.querySelector('.button2');
 const button3 = document.querySelector('.button3');
 let sorted;
 let language = false;
-let sortFi = true;
-let sortEn = true;
+let sortFi = false;
+let sortEn = false;
 let selectedLanguage;
 let selectedLanguage2;
+
+const sodexoAddress = 'https://www.sodexo.fi/ruokalistat/output/daily_json/152/';
+const fazerAddressFi = 'https://cors-anywhere.herokuapp.com/https://www.fazerfoodco.fi/api/restaurant/menu/week?language=fi&restaurantPageId=270540&weekDate=';
+const fazerAddressEn = 'https://cors-anywhere.herokuapp.com/https://www.fazerfoodco.fi/api/restaurant/menu/week?language=en&restaurantPageId=270540&weekDate=';
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
@@ -44,13 +49,53 @@ const changeLanguage = (languages, box) => {
   }
 };
 
-const sodexoFi = parseSodexoMenu(0);
-const sodexoEn = parseSodexoMenu(1);
-changeLanguage(sodexoFi, box);
+let today = new Date();
+let dd = today.getDate();
 
-const fazerFi = runParseFazerMenu(0, 0);
-const fazerEn = runParseFazerMenu(1, 0);
-changeLanguage(fazerFi, box2);
+let mm = today.getMonth()+1;
+let yyyy = today.getFullYear();
+if(dd<10)
+{
+    dd='0'+dd;
+}
+
+if(mm<10)
+{
+    mm='0'+mm;
+}
+const dayOfTheWeek = today.getDay() - 1;
+console.log('WeekDay: ' + dayOfTheWeek);
+today = yyyy+'-'+mm+'-'+dd;
+const fazerToday = yyyy - 1 +'-'+mm+'-'+dd;
+console.log(today);
+console.log(fazerToday);
+
+let sodexoFi;
+let sodexoEn;
+let fazerFi;
+let fazerEn;
+
+const getSodexoData = async () =>{
+  const address = sodexoAddress + today;
+  const data = await getMenus(address);
+  sodexoFi = parseSodexoMenu(data, 0);
+  sodexoEn = parseSodexoMenu(data, 1);
+  changeLanguage(sodexoFi, box);
+};
+
+getSodexoData();
+
+const getFazerData = async () => {
+  let address = fazerAddressFi + fazerToday;
+  const dataFi = await getMenus(address);
+  address = fazerAddressEn + fazerToday;
+  const dataEn = await getMenus(address);
+  fazerFi = runParseFazerMenu(dataFi, dayOfTheWeek);
+  fazerEn = runParseFazerMenu(dataEn, dayOfTheWeek);
+  changeLanguage(fazerFi, box2);
+};
+
+getFazerData();
 
 button.addEventListener('click', () => {
   if(language){
@@ -127,8 +172,6 @@ const randomDish = () => {
 button3.addEventListener('click', () => {
   randomDish();
 });
-
-
 
 
 

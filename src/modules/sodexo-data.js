@@ -1,9 +1,9 @@
-import Lunchmenu from '../assets/sodexo-menu.json';
 let coursesEn = [];
 let coursesFi = [];
 
-const parseSodexoMenu = (number) => {
-  const courses = Object.values(Lunchmenu.courses);
+const parseSodexoMenu = (data, number) => {
+  console.log('SodexoData: ' + data.courses);
+  const courses = Object.values(data.courses);
   coursesEn = [];
   coursesFi = [];
   for(const course of courses) {

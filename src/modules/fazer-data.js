@@ -1,6 +1,3 @@
-import LunchMenuFazerFi from '../assets/fazer-week-fi.json';
-import LunchMenuFazerEn from '../assets/fazer-week-en.json';
-
 const parseFazerMenu = (setMenus) => {
   let dailyMenu = setMenus.map(setMenu => {
     let mealName = setMenu.Name;
@@ -12,12 +9,8 @@ const parseFazerMenu = (setMenus) => {
   return dailyMenu;
 };
 
-const runParseFazerMenu = (number, dayOfTheWeek) =>{
-  if(number === 0){
-    return parseFazerMenu(LunchMenuFazerFi.LunchMenus[dayOfTheWeek].SetMenus);
-  }else{
-    return parseFazerMenu(LunchMenuFazerEn.LunchMenus[dayOfTheWeek].SetMenus);
-  }
+const runParseFazerMenu = (menu, dayOfTheWeek) =>{
+    return parseFazerMenu(menu.LunchMenus[dayOfTheWeek].SetMenus);
 };
 
 export {runParseFazerMenu};
