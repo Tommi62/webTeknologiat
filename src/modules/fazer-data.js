@@ -1,3 +1,7 @@
+const fazerAddressFi = 'https://cors-anywhere.herokuapp.com/https://www.fazerfoodco.fi/api/restaurant/menu/week?language=fi&restaurantPageId=270540&weekDate=';
+const fazerAddressEn = 'https://cors-anywhere.herokuapp.com/https://www.fazerfoodco.fi/api/restaurant/menu/week?language=en&restaurantPageId=270540&weekDate=';
+
+
 const parseFazerMenu = (setMenus) => {
   let dailyMenu = setMenus.map(setMenu => {
     let mealName = setMenu.Name;
@@ -13,4 +17,4 @@ const runParseFazerMenu = (menu, dayOfTheWeek) =>{
     return parseFazerMenu(menu.LunchMenus[dayOfTheWeek].SetMenus);
 };
 
-export {runParseFazerMenu};
+export {fazerAddressFi, fazerAddressEn, runParseFazerMenu};

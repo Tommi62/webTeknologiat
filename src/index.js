@@ -1,5 +1,5 @@
-import {parseSodexoMenu} from './modules/sodexo-data';
-import {runParseFazerMenu} from './modules/fazer-data';
+import {sodexoAddress, parseSodexoMenu} from './modules/sodexo-data';
+import {fazerAddressFi, fazerAddressEn, runParseFazerMenu} from './modules/fazer-data';
 import {getMenus} from './modules/network-features';
 const box = document.querySelector('#res1');
 const box2 = document.querySelector('#res2');
@@ -12,10 +12,6 @@ let sortFi = false;
 let sortEn = false;
 let selectedLanguage;
 let selectedLanguage2;
-
-const sodexoAddress = 'https://www.sodexo.fi/ruokalistat/output/daily_json/152/';
-const fazerAddressFi = 'https://cors-anywhere.herokuapp.com/https://www.fazerfoodco.fi/api/restaurant/menu/week?language=fi&restaurantPageId=270540&weekDate=';
-const fazerAddressEn = 'https://cors-anywhere.herokuapp.com/https://www.fazerfoodco.fi/api/restaurant/menu/week?language=en&restaurantPageId=270540&weekDate=';
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
@@ -50,25 +46,29 @@ const changeLanguage = (languages, box) => {
 };
 
 let today = new Date();
-let dd = today.getDate();
+let fazerToday;
+let dayOfTheWeek;
 
-let mm = today.getMonth()+1;
-let yyyy = today.getFullYear();
-if(dd<10)
-{
-    dd='0'+dd;
-}
+const getDate = (date) => {
+  let dd = date.getDate();
+  let mm = date.getMonth()+1;
+  let yyyy = date.getFullYear();
+  if(dd<10)
+  {
+      dd='0'+dd;
+  }
 
-if(mm<10)
-{
-    mm='0'+mm;
-}
-const dayOfTheWeek = today.getDay() - 1;
-console.log('WeekDay: ' + dayOfTheWeek);
-today = yyyy+'-'+mm+'-'+dd;
-const fazerToday = yyyy - 1 +'-'+mm+'-'+dd;
-console.log(today);
-console.log(fazerToday);
+  if(mm<10)
+  {
+      mm='0'+mm;
+  }
+  dayOfTheWeek = date.getDay() - 1;
+  console.log('WeekDay: ' + dayOfTheWeek);
+  today = yyyy+'-'+mm+'-'+dd;
+  fazerToday = yyyy - 1 +'-'+mm+'-'+dd;
+};
+
+getDate(today);
 
 let sodexoFi;
 let sodexoEn;
@@ -76,23 +76,31 @@ let fazerFi;
 let fazerEn;
 
 const getSodexoData = async () =>{
-  const address = sodexoAddress + today;
-  const data = await getMenus(address);
-  sodexoFi = parseSodexoMenu(data, 0);
-  sodexoEn = parseSodexoMenu(data, 1);
-  changeLanguage(sodexoFi, box);
+  try{
+    const address = sodexoAddress + today;
+    const data = await getMenus(address);
+    sodexoFi = parseSodexoMenu(data, 0);
+    sodexoEn = parseSodexoMenu(data, 1);
+    changeLanguage(sodexoFi, box);
+  } catch (error) {
+    console.error('getSodexoData error', error.message);
+  }
 };
 
 getSodexoData();
 
 const getFazerData = async () => {
-  let address = fazerAddressFi + fazerToday;
-  const dataFi = await getMenus(address);
-  address = fazerAddressEn + fazerToday;
-  const dataEn = await getMenus(address);
-  fazerFi = runParseFazerMenu(dataFi, dayOfTheWeek);
-  fazerEn = runParseFazerMenu(dataEn, dayOfTheWeek);
-  changeLanguage(fazerFi, box2);
+  try{
+    let address = fazerAddressFi + fazerToday;
+    const dataFi = await getMenus(address);
+    address = fazerAddressEn + fazerToday;
+    const dataEn = await getMenus(address);
+    fazerFi = runParseFazerMenu(dataFi, dayOfTheWeek);
+    fazerEn = runParseFazerMenu(dataEn, dayOfTheWeek);
+    changeLanguage(fazerFi, box2);
+  } catch (error) {
+    console.error('getFazeroData error', error.message);
+  }
 };
 
 getFazerData();
@@ -173,5 +181,59 @@ button3.addEventListener('click', () => {
   randomDish();
 });
 
+/*Seuraava pätkä mahdollistaa saman viikon muiden arkipäivien (ma-pe) ruokalistojen hakemisen sytöttämällä
+kyseisen päivän nimen joko suomeksi tai englanniksi hakukenttään ja painamalla suurennuslasia (ns. haku-nappia).
+Jos käyttäjä yrittää hakea jotain muuta, tulee alert joka ilmoittaa, että mitään ei löytynyt joko suomeksi tai
+englanniksi riippuen siitä kumpi kieli on juuri silloin valittuna.*/
 
+const daysOfTheWeekFi = [
+  'maanantai',
+  'tiistai',
+  'keskiviikko',
+  'torstai',
+  'perjantai'
+];
 
+const daysOfTheWeekEn = [
+  'monday',
+  'tuesday',
+  'wednesday',
+  'thursday',
+  'friday'
+];
+
+const changeDay = (targetIndex) => {
+  let now = new Date();
+  let nowIndex = now.getDay() -1;
+  let targetDay = targetIndex - nowIndex;
+  now.setDate(now.getDate() + targetDay);
+  console.log('NOW: ' + now);
+  getDate(now);
+  getSodexoData();
+  getFazerData();
+  resetValues();
+};
+const input = document.querySelector('#search');
+const searchButton = document.querySelector('#searchButton');
+
+searchButton.addEventListener('click', () =>{
+  const value = input.value.toLowerCase();
+  if(daysOfTheWeekFi.includes(value)){
+    changeDay(daysOfTheWeekFi.indexOf(value));
+    console.log('Click detected');
+  }else if(daysOfTheWeekEn.includes(value)){
+    changeDay(daysOfTheWeekEn.indexOf(value));
+  }else{
+    if(!language){
+      alert('Ei hakutuloksia.');
+    }else{
+      alert('No results found.');
+    }
+  }
+});
+
+const resetValues = () => {
+  language = false;
+  sortFi = false;
+  sortEn = false;
+};

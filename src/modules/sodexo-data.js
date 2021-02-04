@@ -1,3 +1,4 @@
+const sodexoAddress = 'https://www.sodexo.fi/ruokalistat/output/daily_json/152/';
 let coursesEn = [];
 let coursesFi = [];
 
@@ -18,4 +19,4 @@ const parseSodexoMenu = (data, number) => {
 
 };
 
-export {parseSodexoMenu};
+export {sodexoAddress, parseSodexoMenu};
