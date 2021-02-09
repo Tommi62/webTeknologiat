@@ -49,17 +49,9 @@
   width: 120px;
   height: 110px;
 
-  transition: left 3s linear;
-
   background-image: url('sprite.png');
   background-repeat: no-repeat;
   background-position: 0 0;
-
-  animation: doggowalk 0.5s steps(4) 6,
-  doggosniff 0.5s 3s steps(2) 6,
-  doggoscare 1s 6s steps(1) 1,
-  doggoescape 1s 7s steps(2) 1,
-  doggocamp 0.5s 8s steps(2) infinite;
 
   /*animation-name: doggowalk;
   animation-duration: 0.5s;
@@ -70,6 +62,12 @@
 
 .fromleft{
   left: 300px;
+  animation: doggowalk 0.5s steps(4) 6,
+  doggosniff 0.5s 3s steps(2) 6,
+  doggoscare 1s 6s steps(1) 1,
+  doggoescape 1s 7s steps(2) 1,
+  doggocamp 0.5s 8s steps(2) infinite;
+  transition: left 3s linear;
 }
 
 @keyframes doggowalk{
@@ -104,21 +102,18 @@
   width: 80px;
   height: 70px;
 
-  transition: left 6s linear, top 6s linear;
-
   background-image: url('sprite.png');
   background-repeat: no-repeat;
   background-position: 0 -220px;
-
-  animation: birdfly 0.5s steps(3) 12,
-  birdrise 0.5s 6s steps(3) 6,
-  birdfly 0.5s 9s steps(3) infinite;
-
 }
 
 .birdattack{
-  left: 255px;
-  top: 300px;
+  left: 251px;
+  top: 303px;
+  animation: birdfly 0.5s steps(3) 12,
+  birdrise 0.5s 6s steps(3) 6,
+  birdfly 0.5s 9s steps(3) infinite;
+  transition: left 6s linear, top 6s linear;
 }
 
 .birdescape{
@@ -142,5 +137,25 @@
   to{background-position: -225px -310px;}
 }
 
+.bird2{
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 80px;
+  height: 70px;
 
+  background-image: url('sprite.png');
+  background-repeat: no-repeat;
+  background-position: -250px -230px;
+}
 
+.bird2fly{
+  left: 570px;
+  animation: bird2fly 1s steps(3) infinite;
+  transition: left 11s linear;
+}
+
+@keyframes bird2fly{
+  from{background-position: -250px -230px;}
+  to{background-position: -490px -230px;}
+}

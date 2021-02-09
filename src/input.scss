@@ -1,0 +1,70 @@
+@use 'base';
+
+@mixin img-filter($amount){
+  -webkit-filter: blur($amount);
+  filter: blur($amount);
+}
+
+body {
+    font-family: Helvetica, sans-serif;
+    margin: 0; }
+
+  nav{
+
+    ul {
+      list-style-type: none;
+      background-color: base.$theme-color;
+      overflow: auto;
+      padding: 0;
+      margin: 0 0 16px;
+    }
+
+    li {
+      float: left;
+    }
+
+    a {
+      display: block;
+      text-decoration: none;
+      text-transform: capitalize;
+      color: white;
+      padding: 16px 18px;
+
+      &:hover {
+        background-color: beige;
+        color: black;
+      }
+    }
+
+  }
+
+  %textbox-shared {
+    padding: 16px;
+    border-radius: 10px;
+    width: 50%; }
+
+  .textbox1 {
+    border: solid 1px red;
+    background-color: burlywood;
+    @extend %textbox-shared; }
+
+  .textbox2 {
+    border: solid 1px blue;
+    background-color: #ffcccc;
+    @extend %textbox-shared; }
+
+  .center {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center; }
+
+  .image1 {
+    @include img-filter(5px);
+    width: 50%; }
+
+  .image2 {
+    @include img-filter(15px);
+    width: 50%; }
+
+
