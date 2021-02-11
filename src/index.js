@@ -6,6 +6,7 @@ const box2 = document.querySelector('#res2');
 const button = document.querySelector('.button');
 const button2 = document.querySelector('.button2');
 const button3 = document.querySelector('.button3');
+const button4 = document.querySelector('.button4');
 let sorted;
 let language = false;
 let sortFi = false;
@@ -38,6 +39,85 @@ navIcon.addEventListener('click', () => {
   changeNavBar();
 });
 
+let mode = localStorage.getItem('mode');
+if(mode === 'dark'){
+  document.body.classList.toggle('dark-theme');
+}
+button4.addEventListener('click', () => {
+  document.body.classList.toggle('dark-theme');
+  if(document.body.classList.contains('dark-theme')){
+    localStorage.setItem('mode', 'dark');
+  } else{
+    localStorage.setItem('mode', 'light');
+  }
+});
+
+const closeBtns = document.getElementsByClassName('close');
+for(const closeBtn of closeBtns){
+  closeBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    closeBtn.parentElement.style.display = 'none';
+    adjustBtns(2);
+  });
+}
+
+const addBtn = document.querySelector('.addButton');
+const restaurants = document.getElementsByClassName('restaurants');
+const btns = document.querySelector('.buttons');
+
+addBtn.addEventListener('click', () => {
+  btns.style.display = 'flex';
+  for(const restaurant of restaurants){
+    if(restaurant.style.display === 'none'){
+      restaurant.style.display = 'block';
+      break;
+    }
+  }
+  adjustBtns(2);
+});
+
+const adjustBtns = (number) => {
+  let count = 0;
+  let index = 0;
+  let oneOrTwo;
+  for(const restaurant of restaurants){
+    index++;
+    if(restaurant.style.display === 'none'){
+      count++;
+      oneOrTwo = index;
+    }
+  }
+  if(count === number){
+    btns.style.display = 'none';
+    addBtn.style.display = 'flex';
+    localStorage.setItem('restaurants', 0);
+  } else if(count === 0){
+    addBtn.style.display = 'none';
+    localStorage.setItem('restaurants', 3);
+  } else{
+    addBtn.style.display = 'flex';
+    localStorage.setItem('restaurants', oneOrTwo);
+    console.log('Item: ' + localStorage.getItem('restaurants'));
+  }
+};
+
+const restaurantSettings = () => {
+  let situation = parseInt(localStorage.getItem('restaurants'));
+  let index = 0;
+  if(situation == 1 || situation == 2){
+    for(const restaurant of restaurants){
+      index++;
+      if(index === situation){
+        restaurant.style.display = 'none';
+      }
+    }
+  }else if(situation === 0){
+    for(const restaurant of restaurants){
+      restaurant.style.display = 'none';
+    }
+  }
+};
+
 const changeLanguage = (languages, box) => {
   box.innerHTML = '';
   for(const language of languages){
@@ -68,8 +148,6 @@ const getDate = (date) => {
   fazerToday = yyyy - 1 +'-'+mm+'-'+dd;
 };
 
-getDate(today);
-
 let sodexoFi;
 let sodexoEn;
 let fazerFi;
@@ -87,8 +165,6 @@ const getSodexoData = async () =>{
   }
 };
 
-getSodexoData();
-
 const getFazerData = async () => {
   try{
     let address = fazerAddressFi + fazerToday;
@@ -102,8 +178,6 @@ const getFazerData = async () => {
     console.error('getFazeroData error', error.message);
   }
 };
-
-getFazerData();
 
 button.addEventListener('click', () => {
   if(language){
@@ -237,3 +311,13 @@ const resetValues = () => {
   sortFi = false;
   sortEn = false;
 };
+
+const init = () => {
+  restaurantSettings();
+  adjustBtns(2);
+  getDate(today);
+  getSodexoData();
+  getFazerData();
+};
+
+init();

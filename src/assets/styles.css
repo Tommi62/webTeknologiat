@@ -1,5 +1,5 @@
 :root {
-  --green: #9B009E;
+  --purple: #9B009E;
   --red: #940e3f;
   --dark: #343A40;
   --grey: #9badbf;
@@ -7,6 +7,31 @@
   --darkGreen: #1D9426;
   --altGreen: #65FF71;
   --altRed: #E0437C;
+  --white: #ffffff;
+}
+
+.light-theme{
+  --bg: var(--white);
+  --search: var(--red);
+  --navLink: var(--red);
+  --infoText: var(--dark);
+  --resH4: var(--black);
+  --resContent: var(--dark);
+  --resBorder: var(--grey);
+  --addBtnHover: var(--black);
+  --icon: var(--red);
+}
+
+.dark-theme{
+  --bg: var(--dark);
+  --search: var(--red);
+  --navLink: var(--white);
+  --infoText: var(--white);
+  --resH4: var(--white);
+  --resContent: var(--white);
+  --resBorder: var(--white);
+  --addBtnHover: var(--white);
+  --icon: var(--white);
 }
 
 *{
@@ -18,6 +43,8 @@
 html, body {
   max-width: 100%;
   overflow-x: hidden;
+  background-color: var(--bg);
+  color: var(--resH4);
 }
 
 .navbar{
@@ -29,6 +56,7 @@ html, body {
 
 .navbar .icon {
   display: none;
+  color: var(--icon);
 }
 
 .container{
@@ -50,14 +78,14 @@ html, body {
   font-family: 'Lato', sans-serif;
   font-weight: 700;
   font-size: 1.5em;
-  color: var(--red);
+  color: var(--navLink);
   padding: 0.7rem;
   border-radius: 0.3rem;
   line-height: 3.1rem;
 }
 
 .navLink:hover{
-  background-color: var(--green);
+  background-color: var(--purple);
   color: #ffffff;
 }
 
@@ -69,7 +97,7 @@ html, body {
 #search{
   padding: 0.47rem;
   padding-left: 2.1rem;
-  border-color: var(--red);
+  border-color: var(--search);
   border-radius: 0.3rem;
 }
 
@@ -84,7 +112,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--green);
+  background-color: var(--purple);
 }
 
 #sloganText h2{
@@ -118,7 +146,7 @@ html, body {
 #info{
   text-align: center;
   padding: 2% 15%;
-  color: var(--dark);
+  color: var(--infoText);
   font-family: 'Lato', sans-serif;
   font-size: 1.5em;
 }
@@ -134,7 +162,8 @@ html, body {
   margin: 2rem;
   padding: 0.5rem;
   border-radius: 0.5rem;
-  border: 2px solid var(--grey);
+  border: 2px solid var(--resBorder);
+  position: relative;
 }
 
 .restaurants svg{
@@ -144,15 +173,32 @@ html, body {
   text-align: center;
 }
 
+.close{
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: var(--resBorder);
+  cursor: pointer;
+}
+
+.close:hover {
+  color: var(--purple);
+}
+
+.location{
+  stroke: var(--resContent);
+  fill: var(--resContent);
+}
+
 .location:hover{
-  stroke: var(--green);
-  fill: var(--green);
+  stroke: var(--purple);
+  fill: var(--purple);
 }
 
 .restaurants h4{
   margin-top: 1rem;
   float: left;
-  color: var(--black);
+  color: var(--resH4);
   font-family: 'Lato', sans-serif;
   font-weight: 700;
   font-size: 1.3em;
@@ -161,14 +207,14 @@ html, body {
 #triangle{
   width: 0;
   height: 0;
-  border-bottom: 30vh solid var(--green);
+  border-bottom: 30vh solid var(--purple);
   border-right: 10vw solid transparent;
 
 }
 
 .res1{
   list-style-type: none;
-  color: var(--dark);
+  color: var(--resContent);
   font-family: 'Lato', sans-serif;
   font-size: 0.7em;
 }
@@ -193,7 +239,6 @@ html, body {
   justify-content: center;
   max-width: 100%;
   overflow-x: hidden;
-  margin-right: 35rem;
 }
 
 .addButton svg{
@@ -204,23 +249,37 @@ html, body {
 }
 
 .addButton svg:hover{
-  stroke: var(--black);
-  fill: var(--black);
+  stroke: var(--addBtnHover);
+  fill: var(--addBtnHover);
+  cursor: pointer;
 }
 
 .addButton svg:hover + .addRes{
-  color: #000000;
+  color: var(--addBtnHover)
 }
 
 .addButton svg:active{
-  stroke: var(--green);
-  fill: var(--green);
+  stroke: var(--purple);
+  fill: var(--purple);
 }
 
 .addRes{
   list-style-type: none;
   text-decoration: none;
   color: var(--grey);
+}
+
+.addRes:hover{
+  color: var(--addBtnHover);
+}
+
+.addRes:hover + #plus{
+  stroke: var(--addBtnHover);
+  fill: var(--addBtnHover);
+}
+
+.addRes:active{
+  color: var(--purple);
 }
 
 .buttons{
